@@ -10,6 +10,7 @@ namespace VaiFundos
     {
         private int codInvestimento;
         private List<double> aplicacao =  new List<double>
+        private string teste;
         
     }
 }
