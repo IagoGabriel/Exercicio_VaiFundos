@@ -32,7 +32,6 @@ namespace VaiFundos
             }
 
             Cliente.escreveArquivo(clientes);
-
             Cliente.imprimeListaCliente(clientes);
             
 
