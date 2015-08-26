@@ -9,7 +9,7 @@ namespace VaiFundos
     class FundoInvestimento
     {
         private int codInvestimento;
-        private List<double> aplicacao =  new List<double>
+        private List<double> aplicacao = new List<double>();
         private string teste;
         
     }

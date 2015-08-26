@@ -13,32 +13,24 @@ namespace VaiFundos
         private String endereco;
         private String cpf;
         private String telefone;
-        private DateTime datacadastro;
+        private DateTime dataCadastro;
 
+        public Cliente(int increment, string nome, string endereco, string cpf, string telefone, DateTime dataCadastro) {
 
-
-        public Cliente(int codCliente, string nome, string endereco, string cpf, string telefone, DateTime datacadastro) {
-
-            this.codCliente = codCliente;
+            this.codCliente = increment+1;
             this.nome = nome;
             this.endereco = endereco;
             this.cpf = cpf;
             this.telefone = telefone;
-            this.datacadastro = datacadastro;
+            this.dataCadastro = dataCadastro;
         
-        }
-
-
-        public void setCodC1iente(int codCliente){
-        this.codCliente = codCliente;
         }
 
         public int getCodCliente() {
             return codCliente;
         }
 
-
-        public void setCodCliente(string nome){
+        public void setNome(string nome){
             this.nome = nome;
         }
 
@@ -51,7 +43,7 @@ namespace VaiFundos
         }
 
         public string getEndereco(){
-        return endereco;
+            return endereco;
         } 
         
         public void setCpf(string cpf) {
@@ -59,7 +51,7 @@ namespace VaiFundos
         }
 
         public string getCpf(){
-        return cpf;
+            return cpf;
         } 
 
         public void setTelefone(string telefone) {
@@ -67,17 +59,30 @@ namespace VaiFundos
         }
 
         public string getTelefone(){
-        return telefone;
+            return telefone;
         }
 
-        public void setDatacadastro(DateTime datacadastro)
+        public void setDataCadastro(DateTime dataCadastro)
         {
-            this.datacadastro = datacadastro;
+            this.dataCadastro = dataCadastro;
         }
 
-        public DateTime getdatacadastro(){
-            return datacadastro;
+        public DateTime getdataCadastro(){
+            return dataCadastro;
         }
+
+        public static void imprimeListaCliente(List<Cliente> clientes)
+        {
+            for (int i = 0; i < clientes.Count(); i++ )
+            {
+                Console.WriteLine("\nCódigo: {0}\nNome: {1}\nEndereço: {2}\nCPF: {3}\nTelefone: {4}\nData de cadastro: {5}\n", clientes[i].codCliente, clientes[i].nome, clientes[i].endereco, clientes[i].cpf, clientes[i].telefone, clientes[i].dataCadastro);
+
+            }
+
+        }
+
+
+
     }
 
 
