@@ -15,7 +15,6 @@ namespace VaiFundos
             Cliente clientePadrao;
             String nome, endereco, cpf, telefone;
 
-
             for (int i = 0; i < 1; i++ )
             {
                 Console.WriteLine("Digite o nome do {0}º cliente:", i+1);
@@ -32,7 +31,11 @@ namespace VaiFundos
 
             }
 
+            Cliente.escreveArquivo(clientes);
+
             Cliente.imprimeListaCliente(clientes);
+            
+
             Console.ReadKey();
 
 

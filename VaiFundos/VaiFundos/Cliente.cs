@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace VaiFundos
 {
@@ -81,6 +82,39 @@ namespace VaiFundos
 
         }
 
+        public void lerArquivo()
+        {
+            if (File.Exists("clientes.txt"))
+            {
+                Stream arqDados = File.Open("clientes.txt", FileMode.Open);
+                StreamReader leitor = new StreamReader(arqDados);
+                string linha = leitor.ReadLine();
+
+                while (linha != null)
+                {
+                    linha = leitor.ReadLine();
+                }
+
+                leitor.Close();
+                arqDados.Close();
+            }
+        }
+
+        public static void escreveArquivo(List<Cliente> clientes)
+        {
+            FileStream arqDados = new FileStream("clientes.txt", FileMode.Create, FileAccess.Write);
+            StreamWriter escritor = new StreamWriter(arqDados, Encoding.UTF8);
+
+            for (int i = 0; i < clientes.Count();i++)
+            {
+                escritor.WriteLine(clientes[i].codCliente + ";" + clientes[i].nome + ";" + clientes[i].endereco + ";" + clientes[i].cpf + ";" + clientes[i].telefone + ";" + clientes[i].dataCadastro);
+            }
+
+
+            escritor.Close();
+            arqDados.Close();
+
+        }
 
 
     }
