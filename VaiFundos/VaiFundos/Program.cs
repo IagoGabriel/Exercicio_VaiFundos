@@ -34,6 +34,7 @@ namespace VaiFundos
             Cliente.escreveArquivo(clientes);
             Cliente.imprimeListaCliente(clientes);           
 
+
             Console.ReadKey();
 
 
