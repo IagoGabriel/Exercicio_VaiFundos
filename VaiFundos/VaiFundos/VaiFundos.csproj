@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
+    <Compile Include="Dolar.cs" />
     <Compile Include="FundoInvestimento.cs" />
     <Compile Include="Moeda.cs" />
     <Compile Include="Program.cs" />
