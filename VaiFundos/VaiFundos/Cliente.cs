@@ -82,9 +82,9 @@ namespace VaiFundos
 
         public static void lerArquivo(List<Cliente> clientes)
         {
-            if (File.Exists("clientes.txt"))
+            if (File.Exists("../../clientes.txt"))
             {
-                Stream arqDados = File.Open("clientes.txt", FileMode.Open);
+                Stream arqDados = File.Open("../../clientes.txt", FileMode.Open);
                 StreamReader leitor = new StreamReader(arqDados);
                 String linha = leitor.ReadLine();
                 String[] separador;
@@ -106,7 +106,7 @@ namespace VaiFundos
 
         public static void escreveArquivo(List<Cliente> clientes)
         {
-            FileStream arqDados = new FileStream("clientes.txt", FileMode.Create, FileAccess.Write);
+            FileStream arqDados = new FileStream("../../clientes.txt", FileMode.Create, FileAccess.Write);
             StreamWriter escritor = new StreamWriter(arqDados, Encoding.UTF8);
 
             for (int i = 0; i < clientes.Count();i++)
