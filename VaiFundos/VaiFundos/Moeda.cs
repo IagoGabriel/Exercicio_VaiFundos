@@ -13,18 +13,18 @@ namespace VaiFundos
         protected int codmoeda;
         protected float valormoeda;
         protected float inflacao;
-        protected string usando_pais;
+        protected string usado_pais;
         protected string simbolo;
 
 
-        public Moeda(int notas, int codmoeda, float valormoeda, float inflacao, string usando_pais, string simbolo)
+        public Moeda(int notas, int codmoeda, float valormoeda, float inflacao, string usado_pais, string simbolo)
         {
 
             this.notas = new int[6];
             this.codmoeda = codmoeda;
             this.valormoeda = valormoeda;
             this.inflacao = inflacao;
-            this.usando_pais = usando_pais;
+            this.usado_pais = usado_pais;
             this.simbolo = simbolo;
 
         }
@@ -56,9 +56,20 @@ namespace VaiFundos
             this.inflacao = inflacao;
         }
 
-        public string getUsando_pais()
+   
+        public string getUsado_pais()
         {
-            return usando_pais;
+            return usado_pais;
+        }
+
+        public void setUsado_pais(string usado_pais)
+        {
+            this.usado_pais = usado_pais;
+        }
+
+        public string getSimbolo()
+        {
+            return simbolo;
         }
 
         public void setSimbolo(string simbolo)
