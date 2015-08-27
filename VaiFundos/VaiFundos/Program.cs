@@ -30,7 +30,7 @@ namespace VaiFundos
                 Console.WriteLine("Digite o telefone do {0}º cliente:", i + 1);
                 telefone = Console.ReadLine();
 
-                clientePadrao = new Cliente(clientes.Count(), nome, endereco, cpf, telefone, DateTime.Now);
+                clientePadrao = new Cliente(clientes.Count(), nome, endereco, cpf, telefone);
                 clientes.Add(clientePadrao);
 
             }

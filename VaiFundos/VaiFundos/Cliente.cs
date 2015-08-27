@@ -16,14 +16,14 @@ namespace VaiFundos
         private String telefone;
         private DateTime dataCadastro;
 
-        public Cliente(int increment, string nome, string endereco, string cpf, string telefone, DateTime dataCadastro) {
+        public Cliente(int increment, String nome, String endereco, String cpf, String telefone) {
 
             this.codCliente = increment+1;
             this.nome = nome;
             this.endereco = endereco;
             this.cpf = cpf;
             this.telefone = telefone;
-            this.dataCadastro = dataCadastro;
+            this.dataCadastro = DateTime.Now;
         
         }
 
@@ -31,35 +31,35 @@ namespace VaiFundos
             return codCliente;
         }
 
-        public void setNome(string nome){
+        public void setNome(String nome){
             this.nome = nome;
         }
 
-        public string getNome() {
+        public String getNome() {
             return nome;
         }
 
-        public void setEndereco(string endereco) {
+        public void setEndereco(String endereco) {
             this.endereco = endereco;
         }
 
-        public string getEndereco(){
+        public String getEndereco(){
             return endereco;
         } 
         
-        public void setCpf(string cpf) {
+        public void setCpf(String cpf) {
             this.cpf = cpf;
         }
 
-        public string getCpf(){
+        public String getCpf(){
             return cpf;
         } 
 
-        public void setTelefone(string telefone) {
+        public void setTelefone(String telefone) {
             this.telefone = telefone;
         }
 
-        public string getTelefone(){
+        public String getTelefone(){
             return telefone;
         }
 
@@ -113,7 +113,6 @@ namespace VaiFundos
             {
                 escritor.WriteLine(clientes[i].codCliente + ";" + clientes[i].nome + ";" + clientes[i].endereco + ";" + clientes[i].cpf + ";" + clientes[i].telefone + ";" + clientes[i].dataCadastro.ToShortDateString());
             }
-
 
             escritor.Close();
             arqDados.Close();

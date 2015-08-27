@@ -8,37 +8,41 @@ namespace VaiFundos
 {
     class Real : Moeda 
     {
-        private string cod_iso;
-        private string titulo_moeda;
-
-
-        public Real(string cod_iso, string titulo_moeda)
+        private String codISO;
+        private String tituloMoeda;
+        
+        public Real(String codISO, String tituloMoeda, int increment, float valorMoeda, float inflacao, String usadoPais, String simbolo) : base(increment, valorMoeda, inflacao, usadoPais, simbolo)
         {
-
-            this.cod_iso = cod_iso;
-            this.titulo_moeda = titulo_moeda;
-            
-
+            this.codISO = codISO;
+            this.tituloMoeda = tituloMoeda;
+            List<int> notas = new List<int>();
+            notas.Add(100);
+            notas.Add(50);
+            notas.Add(20);
+            notas.Add(10);
+            notas.Add(5);
+            notas.Add(2);
+            this.notas = notas;
         }
 
-        public string getCod_iso()
+        public String getCodISO()
         {
-            return cod_iso;
+            return codISO;
         }
 
-        public void setCod_iso(string cod_iso)
+        public void setCodISO(String codISO)
         {
-            this.cod_iso = cod_iso;
+            this.codISO = codISO;
         }
 
-        public string getTitulo_moeda()
+        public String getTituloMoeda()
         {
-            return titulo_moeda;
+            return tituloMoeda;
         }
 
-        public void setTituloMoeda(string titulo_moeda)
+        public void setTituloMoeda(String tituloMoeda)
         {
-            this.titulo_moeda = titulo_moeda;
+            this.tituloMoeda = tituloMoeda;
         }
     }
 }

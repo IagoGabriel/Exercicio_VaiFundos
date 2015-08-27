@@ -8,42 +8,35 @@ namespace VaiFundos
 {
     class Moeda
     {
-
-        protected int[] notas = new int [6] { 2, 5, 10, 20, 50, 100 };
-        protected int codmoeda;
-        protected float valormoeda;
+        private int codMoeda;
+        protected List<int> notas = new List<int>();
+        protected float valorMoeda;
         protected float inflacao;
-        protected string usado_pais;
-        protected string simbolo;
+        protected String usadoPais;
+        protected String simbolo;
 
-
-        public Moeda(int notas, int codmoeda, float valormoeda, float inflacao, string usado_pais, string simbolo)
+        public Moeda(int increment, float valorMoeda, float inflacao, String usadoPais, String simbolo)
         {
-
-            this.notas = new int[6];
-            this.codmoeda = codmoeda;
-            this.valormoeda = valormoeda;
+            this.codMoeda = increment+1;
+            this.valorMoeda = valorMoeda;
             this.inflacao = inflacao;
-            this.usado_pais = usado_pais;
+            this.usadoPais = usadoPais;
             this.simbolo = simbolo;
-
         }
 
-       
-
-        public void setCodmoeda(int codmoeda)
+        public int getCodMoeda()
         {
-            this.codmoeda = codmoeda;
+            return codMoeda;
         }
 
-        public int getCodmoeda()
+        public float getValorMoeda()
         {
-            return codmoeda;
+            return valorMoeda;
         }
 
-        public void setValormoeda(float valormoeda)
+        public void setValorMoeda(float valorMoeda)
         {
-            this.valormoeda = valormoeda;
+            this.valorMoeda = valorMoeda;
         }
 
         public float getInflacao()
@@ -55,28 +48,25 @@ namespace VaiFundos
         {
             this.inflacao = inflacao;
         }
-
    
-        public string getUsado_pais()
+        public String getUsadoPais()
         {
-            return usado_pais;
+            return usadoPais;
         }
 
-        public void setUsado_pais(string usado_pais)
+        public void setUsadoPais(String usadoPais)
         {
-            this.usado_pais = usado_pais;
+            this.usadoPais = usadoPais;
         }
 
-        public string getSimbolo()
+        public String getSimbolo()
         {
             return simbolo;
         }
 
-        public void setSimbolo(string simbolo)
+        public void setSimbolo(String simbolo)
         {
             this.simbolo = simbolo;
-        }
-
-      
+        }      
     }
 }
