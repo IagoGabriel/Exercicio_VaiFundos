@@ -32,7 +32,6 @@ namespace VaiFundos
 
                 clientePadrao = new Cliente(clientes.Count(), nome, endereco, cpf, telefone);
                 clientes.Add(clientePadrao);
-
             }
             
             Cliente.escreveArquivo(clientes);
