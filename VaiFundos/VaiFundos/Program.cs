@@ -14,12 +14,16 @@ namespace VaiFundos
             List<Cliente> clientes = new List<Cliente>();
             Cliente clientePadrao;
             String nome, endereco, cpf, telefone;
+            Cliente.lerArquivo(clientes);
+
+            Console.WriteLine("Clientes já cadastrados:");
+            Cliente.imprimeListaCliente(clientes);
 
             for (int i = 0; i < 1; i++ )
             {
                 Console.WriteLine("Digite o nome do {0}º cliente:", i+1);
                 nome = Console.ReadLine();
-                Console.WriteLine("Digite o endereço completo do {0}º cliente:", i + 1);
+                Console.WriteLine("Digite o endereço completo do {0}º cliente:", i+1);
                 endereco = Console.ReadLine();
                 Console.WriteLine("Digite o CPF do {0}º cliente:", i + 1);
                 cpf = Console.ReadLine();
@@ -30,7 +34,7 @@ namespace VaiFundos
                 clientes.Add(clientePadrao);
 
             }
-
+            
             Cliente.escreveArquivo(clientes);
             Cliente.imprimeListaCliente(clientes);           
 

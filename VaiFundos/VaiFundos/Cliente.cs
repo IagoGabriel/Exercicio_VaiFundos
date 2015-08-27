@@ -76,24 +76,28 @@ namespace VaiFundos
         {
             for (int i = 0; i < clientes.Count(); i++ )
             {
-                Console.WriteLine("\nCódigo: {0}\nNome: {1}\nEndereço: {2}\nCPF: {3}\nTelefone: {4}\nData de cadastro: {5}\n", clientes[i].codCliente, clientes[i].nome, clientes[i].endereco, clientes[i].cpf, clientes[i].telefone, clientes[i].dataCadastro);
-
+                Console.WriteLine("\nCódigo: {0}\nNome: {1}\nEndereço: {2}\nCPF: {3}\nTelefone: {4}\nData de cadastro: {5}\n", clientes[i].codCliente, clientes[i].nome, clientes[i].endereco, clientes[i].cpf, clientes[i].telefone, clientes[i].dataCadastro.ToShortDateString());
             }
-
         }
 
-        public void lerArquivo()
+        public static void lerArquivo(List<Cliente> clientes)
         {
             if (File.Exists("clientes.txt"))
             {
                 Stream arqDados = File.Open("clientes.txt", FileMode.Open);
                 StreamReader leitor = new StreamReader(arqDados);
-                string linha = leitor.ReadLine();
+                String linha = leitor.ReadLine();
+                String[] separador;
+                Cliente clientePadrao;
 
                 while (linha != null)
                 {
+                    separador = linha.Split(';');
+                    clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], separador[4], DateTime.Parse(separador[5]));
                     linha = leitor.ReadLine();
+                    clientes.Add(clientePadrao);
                 }
+                
 
                 leitor.Close();
                 arqDados.Close();
@@ -107,7 +111,7 @@ namespace VaiFundos
 
             for (int i = 0; i < clientes.Count();i++)
             {
-                escritor.WriteLine(clientes[i].codCliente + ";" + clientes[i].nome + ";" + clientes[i].endereco + ";" + clientes[i].cpf + ";" + clientes[i].telefone + ";" + clientes[i].dataCadastro);
+                escritor.WriteLine(clientes[i].codCliente + ";" + clientes[i].nome + ";" + clientes[i].endereco + ";" + clientes[i].cpf + ";" + clientes[i].telefone + ";" + clientes[i].dataCadastro.ToShortDateString());
             }
 
 
