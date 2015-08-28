@@ -43,10 +43,17 @@ namespace VaiFundos
 
         public static void desconto(double resgate, double irrf, double iof, int codMoeda)
         {
-
+            irrf = 0.1;
+            iof = 0.20;
+            // desconto em real
             if(codMoeda == 1)
             {
-                resgate = resgate - (resgate * 0.1);
+                resgate = resgate - (resgate * irrf);
+            }
+            else
+            {
+                //desconto em dolar
+                resgate = resgate - (resgate * iof);
             }
 
         }
