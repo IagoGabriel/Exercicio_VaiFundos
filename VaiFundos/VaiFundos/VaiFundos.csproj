@@ -45,6 +45,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Dolar.cs" />
     <Compile Include="FundoInvestimento.cs" />
+    <Compile Include="Imposto.cs" />
     <Compile Include="Moeda.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
