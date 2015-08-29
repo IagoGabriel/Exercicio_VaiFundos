@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace VaiFundos
 {
-    class Real : Moeda 
+    class Real : Moeda
     {
         private String codISO;
         private String tituloMoeda;
-        
+
         public Real(String codISO, String tituloMoeda, int increment, float valorMoeda, float inflacao, String usadoPais, String simbolo) : base(increment, valorMoeda, inflacao, usadoPais, simbolo)
         {
             this.codISO = codISO;

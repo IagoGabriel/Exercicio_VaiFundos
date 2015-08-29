@@ -17,7 +17,7 @@ namespace VaiFundos
 
         public Moeda(int increment, float valorMoeda, float inflacao, String usadoPais, String simbolo)
         {
-            this.codMoeda = increment+1;
+            this.codMoeda = increment + 1;
             this.valorMoeda = valorMoeda;
             this.inflacao = inflacao;
             this.usadoPais = usadoPais;
@@ -48,7 +48,7 @@ namespace VaiFundos
         {
             this.inflacao = inflacao;
         }
-   
+
         public String getUsadoPais()
         {
             return usadoPais;
@@ -67,6 +67,7 @@ namespace VaiFundos
         public void setSimbolo(String simbolo)
         {
             this.simbolo = simbolo;
-        }      
+        }
     }
 }
+

@@ -16,50 +16,62 @@ namespace VaiFundos
         private String telefone;
         private DateTime dataCadastro;
 
-        public Cliente(int increment, String nome, String endereco, String cpf, String telefone) {
+        public Cliente(int increment, String nome, String endereco, String cpf, String telefone, DateTime dataCadastro)
+        {
 
-            this.codCliente = increment+1;
+            this.codCliente = increment + 1;
             this.nome = nome;
             this.endereco = endereco;
             this.cpf = cpf;
             this.telefone = telefone;
-            this.dataCadastro = DateTime.Now;
-        
+            this.dataCadastro = dataCadastro;
+
         }
 
-        public int getCodCliente() {
+
+
+        public int getCodCliente()
+        {
             return codCliente;
         }
 
-        public void setNome(String nome){
+        public void setNome(String nome)
+        {
             this.nome = nome;
         }
 
-        public String getNome() {
+        public String getNome()
+        {
             return nome;
         }
 
-        public void setEndereco(String endereco) {
+        public void setEndereco(String endereco)
+        {
             this.endereco = endereco;
         }
 
-        public String getEndereco(){
+        public String getEndereco()
+        {
             return endereco;
-        } 
-        
-        public void setCpf(String cpf) {
+        }
+
+        public void setCpf(String cpf)
+        {
             this.cpf = cpf;
         }
 
-        public String getCpf(){
+        public String getCpf()
+        {
             return cpf;
-        } 
+        }
 
-        public void setTelefone(String telefone) {
+        public void setTelefone(String telefone)
+        {
             this.telefone = telefone;
         }
 
-        public String getTelefone(){
+        public String getTelefone()
+        {
             return telefone;
         }
 
@@ -68,13 +80,14 @@ namespace VaiFundos
             this.dataCadastro = dataCadastro;
         }
 
-        public DateTime getdataCadastro(){
+        public DateTime getDataCadastro()
+        {
             return dataCadastro;
         }
 
         public static void imprimeListaCliente(List<Cliente> clientes)
         {
-            for (int i = 0; i < clientes.Count(); i++ )
+            for (int i = 0; i < clientes.Count(); i++)
             {
                 Console.WriteLine("\nCódigo: {0}\nNome: {1}\nEndereço: {2}\nCPF: {3}\nTelefone: {4}\nData de cadastro: {5}\n", clientes[i].codCliente, clientes[i].nome, clientes[i].endereco, clientes[i].cpf, clientes[i].telefone, clientes[i].dataCadastro.ToShortDateString());
             }
@@ -97,7 +110,7 @@ namespace VaiFundos
                     linha = leitor.ReadLine();
                     clientes.Add(clientePadrao);
                 }
-                
+
 
                 leitor.Close();
                 arqDados.Close();
@@ -109,7 +122,7 @@ namespace VaiFundos
             FileStream arqDados = new FileStream("../../clientes.txt", FileMode.Create, FileAccess.Write);
             StreamWriter escritor = new StreamWriter(arqDados, Encoding.UTF8);
 
-            for (int i = 0; i < clientes.Count();i++)
+            for (int i = 0; i < clientes.Count(); i++)
             {
                 escritor.WriteLine(clientes[i].codCliente + ";" + clientes[i].nome + ";" + clientes[i].endereco + ";" + clientes[i].cpf + ";" + clientes[i].telefone + ";" + clientes[i].dataCadastro.ToShortDateString());
             }

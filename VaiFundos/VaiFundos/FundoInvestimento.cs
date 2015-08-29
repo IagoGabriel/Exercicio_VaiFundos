@@ -50,14 +50,37 @@ namespace VaiFundos
             this.rendimento = rendimento;
         }
 
-        public float getRendimento() {
+        public float getRendimento()
+        {
             return rendimento;
         }
 
-        public void aplicar(Aplicacao aplicacao){
+        public void aplicar(Aplicacao aplicacao)
+        {
             this.aplicacao.Add(aplicacao);
         }
 
-        
+        public int tempoTotalCadastro(Cliente cliente)
+        {
+            TimeSpan totalCadastro = DateTime.Parse(DateTime.Now.ToShortDateString()) - DateTime.Parse(cliente.getDataCadastro().ToShortDateString());
+            return totalCadastro.Days;
+        }
+
+        public void Resgate(double valor, Cliente cliente)
+        {
+            for (int i = 0; i < this.aplicacao.Count(); i++)
+            {
+                if (valor.Equals(this.aplicacao[i].getValorAplicacao()))
+                {
+                    if (tempoTotalCadastro(cliente) >= 365)
+                    {
+
+                    }
+                }
+            }
+
+        }
+
     }
 }
+

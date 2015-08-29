@@ -19,28 +19,34 @@ namespace VaiFundos
             Console.WriteLine("Clientes já cadastrados:");
             Cliente.imprimeListaCliente(clientes);
 
-            for (int i = 0; i < 1; i++ )
+            for (int i = 0; i < 0; i++)
             {
-                Console.WriteLine("Digite o nome do {0}º cliente:", i+1);
+                Console.WriteLine("Digite o nome do {0}º cliente:", i + 1);
                 nome = Console.ReadLine();
-                Console.WriteLine("Digite o endereço completo do {0}º cliente:", i+1);
+                Console.WriteLine("Digite o endereço completo do {0}º cliente:", i + 1);
                 endereco = Console.ReadLine();
                 Console.WriteLine("Digite o CPF do {0}º cliente:", i + 1);
                 cpf = Console.ReadLine();
-                Console.WriteLine("Digite o telefone do {0}º cliente:", i + 1);
+                Console.WriteLine("Digite o telefone do {0}º cliente: ", i + 1);
                 telefone = Console.ReadLine();
 
-                clientePadrao = new Cliente(clientes.Count(), nome, endereco, cpf, telefone);
+                clientePadrao = new Cliente(clientes.Count(), nome, endereco, cpf, telefone, DateTime.Now);
                 clientes.Add(clientePadrao);
             }
-            
+
             Cliente.escreveArquivo(clientes);
-            Cliente.imprimeListaCliente(clientes);           
+            Cliente.imprimeListaCliente(clientes);
+
+
+
 
 
             Console.ReadKey();
 
 
+
+
         }
     }
 }
+
