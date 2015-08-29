@@ -14,7 +14,6 @@ namespace VaiFundos
         private int codMoeda;
         private float rendimento;
 
-
         public FundoInvestimento(int increment, String nome, int codMoeda, float rendimento)
         {
             this.codInvestimento = increment;

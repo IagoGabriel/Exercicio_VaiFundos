@@ -8,14 +8,10 @@ namespace VaiFundos
 {
     class Dolar : Moeda
     {
-        private String codISO;
-        private String tituloMoeda;
+        private float iof=0.01f;
 
-
-        public Dolar(String codISO, String tituloMoeda, int increment, float valorMoeda, float inflacao, String usadoPais, String simbolo) : base(increment, valorMoeda, inflacao, usadoPais, simbolo)
+        public Dolar(int increment, String nomeMoeda, String simbolo) : base(increment, nomeMoeda, simbolo)
         {
-            this.codISO = codISO;
-            this.tituloMoeda = tituloMoeda;
             List<int> notas = new List<int>();
             notas.Add(100);
             notas.Add(50);
@@ -27,24 +23,11 @@ namespace VaiFundos
             this.notas = notas;
         }
 
-        public String getCodISO()
+        public float getIOF()
         {
-            return codISO;
+            return iof;
         }
 
-        public void setCodISO(String codISO)
-        {
-            this.codISO = codISO;
-        }
 
-        public String getTituloMoeda()
-        {
-            return tituloMoeda;
-        }
-
-        public void setTituloMoeda(String tituloMoeda)
-        {
-            this.tituloMoeda = tituloMoeda;
-        }
     }
 }

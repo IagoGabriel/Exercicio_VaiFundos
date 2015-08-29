@@ -15,6 +15,7 @@ namespace VaiFundos
         private String cpf;
         private String telefone;
         private DateTime dataCadastro;
+        List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
 
         public Cliente(int increment, String nome, String endereco, String cpf, String telefone, DateTime dataCadastro)
         {
@@ -27,7 +28,6 @@ namespace VaiFundos
             this.dataCadastro = dataCadastro;
 
         }
-
 
 
         public int getCodCliente()

@@ -9,54 +9,19 @@ namespace VaiFundos
     class Moeda
     {
         private int codMoeda;
-        protected List<int> notas = new List<int>();
-        protected float valorMoeda;
-        protected float inflacao;
-        protected String usadoPais;
         protected String simbolo;
+        private String nomeMoeda;
+        protected List<int> notas = new List<int>();
 
-        public Moeda(int increment, float valorMoeda, float inflacao, String usadoPais, String simbolo)
+        public Moeda(int increment, String nomeMoeda, String simbolo) /*FALTA CÓDIGO ISO E TÍTULO MOEDA*/
         {
             this.codMoeda = increment + 1;
-            this.valorMoeda = valorMoeda;
-            this.inflacao = inflacao;
-            this.usadoPais = usadoPais;
             this.simbolo = simbolo;
         }
 
         public int getCodMoeda()
         {
             return codMoeda;
-        }
-
-        public float getValorMoeda()
-        {
-            return valorMoeda;
-        }
-
-        public void setValorMoeda(float valorMoeda)
-        {
-            this.valorMoeda = valorMoeda;
-        }
-
-        public float getInflacao()
-        {
-            return inflacao;
-        }
-
-        public void setInflacao(float inflacao)
-        {
-            this.inflacao = inflacao;
-        }
-
-        public String getUsadoPais()
-        {
-            return usadoPais;
-        }
-
-        public void setUsadoPais(String usadoPais)
-        {
-            this.usadoPais = usadoPais;
         }
 
         public String getSimbolo()
@@ -67,6 +32,16 @@ namespace VaiFundos
         public void setSimbolo(String simbolo)
         {
             this.simbolo = simbolo;
+        }
+
+        public String getNomeMoeda()
+        {
+            return nomeMoeda;
+        }
+
+        public void setNomeMoeda(String nomeMoeda)
+        {
+            this.nomeMoeda = nomeMoeda;
         }
     }
 }

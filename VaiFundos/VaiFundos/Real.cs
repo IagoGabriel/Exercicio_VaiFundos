@@ -8,13 +8,10 @@ namespace VaiFundos
 {
     class Real : Moeda
     {
-        private String codISO;
-        private String tituloMoeda;
+        private float irrf=0.2f;
 
-        public Real(String codISO, String tituloMoeda, int increment, float valorMoeda, float inflacao, String usadoPais, String simbolo) : base(increment, valorMoeda, inflacao, usadoPais, simbolo)
+        public Real(int increment, String nomeMoeda, String simbolo) : base(increment, nomeMoeda, simbolo)
         {
-            this.codISO = codISO;
-            this.tituloMoeda = tituloMoeda;
             List<int> notas = new List<int>();
             notas.Add(100);
             notas.Add(50);
@@ -25,24 +22,9 @@ namespace VaiFundos
             this.notas = notas;
         }
 
-        public String getCodISO()
+        public float getIRRF()
         {
-            return codISO;
-        }
-
-        public void setCodISO(String codISO)
-        {
-            this.codISO = codISO;
-        }
-
-        public String getTituloMoeda()
-        {
-            return tituloMoeda;
-        }
-
-        public void setTituloMoeda(String tituloMoeda)
-        {
-            this.tituloMoeda = tituloMoeda;
+            return irrf;
         }
     }
 }
