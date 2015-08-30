@@ -11,12 +11,16 @@ namespace VaiFundos
         private int codMoeda;
         protected String simbolo;
         private String nomeMoeda;
+        private String codIso;
+        private String tituloMoeda;
         protected List<int> notas = new List<int>();
 
-        public Moeda(int increment, String nomeMoeda, String simbolo) /*FALTA CÓDIGO ISO E TÍTULO MOEDA*/
+        public Moeda(int increment, String nomeMoeda, String simbolo, String codIso, String tituloMoeda) 
         {
             this.codMoeda = increment + 1;
             this.simbolo = simbolo;
+            this.codIso = codIso;
+            this.tituloMoeda = tituloMoeda;
         }
 
         public int getCodMoeda()
@@ -29,6 +33,15 @@ namespace VaiFundos
             return simbolo;
         }
 
+        public String  getCodIso()
+        {
+            return codIso;
+        }
+
+        public String gettituloMoeda()
+        {
+            return tituloMoeda;
+        }
         public void setSimbolo(String simbolo)
         {
             this.simbolo = simbolo;
