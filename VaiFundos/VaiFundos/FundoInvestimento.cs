@@ -11,20 +11,23 @@ namespace VaiFundos
         private int codInvestimento;
         private String nome;
         private List<Aplicacao> aplicacao = new List<Aplicacao>();
-        private int codMoeda;
-        private float rendimento;
+        private Moeda moeda;
 
-        public FundoInvestimento(int increment, String nome, int codMoeda, float rendimento)
+        public FundoInvestimento(int increment, String nome, Moeda moeda)
         {
             this.codInvestimento = increment;
             this.nome = nome;
-            this.codMoeda = codMoeda;
-            this.rendimento = rendimento;
+            this.moeda = moeda;
         }
 
         public int getCodInvestimento()
         {
             return codInvestimento;
+        }
+
+        public Moeda getMoeda()
+        {
+            return this.moeda;
         }
 
         public String getNome()
@@ -35,23 +38,6 @@ namespace VaiFundos
         public void setNome(String nome)
         {
             this.nome = nome;
-        }
-
-        public int getCodMoeda()
-        {
-            return codMoeda;
-        }
-
-
-        public void setRendimento(float rendimento)
-        {
-
-            this.rendimento = rendimento;
-        }
-
-        public float getRendimento()
-        {
-            return rendimento;
         }
 
         public void aplicar(Aplicacao aplicacao)

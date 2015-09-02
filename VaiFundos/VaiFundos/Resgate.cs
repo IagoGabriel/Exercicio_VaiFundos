@@ -8,5 +8,8 @@ namespace VaiFundos
 {
     class Resgate
     {
+
+        private int CodResgate;
+
     }
 }

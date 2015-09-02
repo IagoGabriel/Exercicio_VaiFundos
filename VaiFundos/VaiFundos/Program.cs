@@ -38,7 +38,15 @@ namespace VaiFundos
             Cliente.imprimeListaCliente(clientes);
 
 
+            
 
+            Moeda moeda = new Moeda(1, "teste", "T$");
+            Real real = new Real(2, "real", "R$");
+            Dolar dolar = new Dolar(3, "dolar", "U$");
+
+            FundoInvestimento MarianeL2 = new FundoInvestimento(1, "MarianeL2", real);
+
+            Console.WriteLine("Notas: {0} dolar(es)", MarianeL2.getMoeda().getNomeMoeda());
 
 
             Console.ReadKey();

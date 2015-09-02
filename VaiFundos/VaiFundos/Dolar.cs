@@ -23,7 +23,7 @@ namespace VaiFundos
             this.notas = notas;
         }
 
-        public float getIOF()
+        public override float getIOF()
         {
             return iof;
         }

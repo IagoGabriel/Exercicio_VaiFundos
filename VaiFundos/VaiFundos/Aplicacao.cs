@@ -11,10 +11,11 @@ namespace VaiFundos
         private int codAplicacao;
         private float valorAplicacao;
         private DateTime dataAplicacao;
+        private float rendimento;
 
         public Aplicacao(int increment, float valorAplicacao)
         {
-            this.codAplicacao = increment + 1;
+            this.codAplicacao = increment + 1;    
             this.valorAplicacao = valorAplicacao;
             this.dataAplicacao = DateTime.Now;
         }
@@ -22,11 +23,6 @@ namespace VaiFundos
         public int getCodAplicacao()
         {
             return codAplicacao;
-        }
-
-        public int getCodCliente()
-        {
-            return codCliente;
         }
 
         public float getValorAplicacao()
@@ -37,6 +33,11 @@ namespace VaiFundos
         public DateTime getDataAplicacao()
         {
             return dataAplicacao;
+        }
+
+        public float getRendimento()
+        {
+            return rendimento;
         }
     }
 }

@@ -11,16 +11,13 @@ namespace VaiFundos
         private int codMoeda;
         protected String simbolo;
         private String nomeMoeda;
-        private String codIso;
-        private String tituloMoeda;
         protected List<int> notas = new List<int>();
 
-        public Moeda(int increment, String nomeMoeda, String simbolo, String codIso, String tituloMoeda) 
+        public Moeda(int increment, String nomeMoeda, String simbolo) 
         {
             this.codMoeda = increment + 1;
             this.simbolo = simbolo;
-            this.codIso = codIso;
-            this.tituloMoeda = tituloMoeda;
+            this.nomeMoeda = nomeMoeda;
         }
 
         public int getCodMoeda()
@@ -32,16 +29,7 @@ namespace VaiFundos
         {
             return simbolo;
         }
-
-        public String  getCodIso()
-        {
-            return codIso;
-        }
-
-        public String gettituloMoeda()
-        {
-            return tituloMoeda;
-        }
+        
         public void setSimbolo(String simbolo)
         {
             this.simbolo = simbolo;
@@ -56,6 +44,23 @@ namespace VaiFundos
         {
             this.nomeMoeda = nomeMoeda;
         }
+
+        public List<int> getNotas()
+        {
+            return notas;
+        }
+
+        public virtual float getIOF()
+        {
+            return 0;
+        }
+
+        public virtual float getIRRF()
+        {
+            return 0;
+        }
+
+
     }
 }
 

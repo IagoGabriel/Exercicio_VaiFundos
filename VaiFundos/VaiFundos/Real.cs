@@ -22,7 +22,7 @@ namespace VaiFundos
             this.notas = notas;
         }
 
-        public float getIRRF()
+        public override float getIRRF()
         {
             return irrf;
         }
