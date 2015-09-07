@@ -8,8 +8,16 @@ namespace VaiFundos
 {
     class Resgate
     {
+        private FundoInvestimento fundoInvestimento;
+        private Aplicacao aplicacao;
+        private DateTime dataResgate;
 
-        private int CodResgate;
+        public Resgate(FundoInvestimento fundoInvestimento, Aplicacao aplicacao)
+        {
+            this.fundoInvestimento = fundoInvestimento;
+            this.aplicacao = aplicacao;
+            this.dataResgate = DateTime.Now;
+        }
 
     }
 }

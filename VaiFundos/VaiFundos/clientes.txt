@@ -1,3 +1,4 @@
-﻿1;Iago Gabriel;Rua Afonso Cláudio nº 52 Barcelona Serra/ES;149.693.017-78;(27)99887-3779;27/08/2015
-2;Thayná Nascimento;Rua Bonde da pesada nº 157 André Carloni Serra/ES;145.658.325-85;(27)99954-8082;27/08/2015
-3;Mariane Monteiro;Avenida Copacabana nº 569 Morada de Laranjeiras Serra/ES;139.046.007-02;(27)998630960;28/08/2015
+﻿1;Iago Gabriel;senha123;Rua Afonso Cláudio nº 52 Barcelona Serra/ES;149.693.017-78;(27)99887-3779;27/08/2015
+2;Thayná Nascimento;senha123;Rua Água Marinha nº 50 André Carloni Serra/ES;145.658.325-85;(27)99954-8082;27/08/2015
+3;Mariane Monteiro;senha123;Avenida Copacabana nº 569 Morada de Laranjeiras Serra/ES;139.046.007-02;(27)998630960;28/08/2015
+4;Cliente há mais de 1 ano;Moradia;158.323.112-91;(27)1234-5678;07/09/2014

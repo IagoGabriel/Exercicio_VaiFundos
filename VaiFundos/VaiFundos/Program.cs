@@ -12,8 +12,8 @@ namespace VaiFundos
         {
 
             List<Cliente> clientes = new List<Cliente>();
-            Cliente clientePadrao;
-            String nome, endereco, cpf, telefone;
+            Cliente clientePadrao = null;
+            String nome, senha, endereco, cpf, telefone;
             Cliente.lerArquivo(clientes);
             int opcao = -1, opcaoBanco = -1, opcaoInvestimento = -1;
 
@@ -41,6 +41,8 @@ namespace VaiFundos
                         {
                             Console.WriteLine("Digite o nome do {0}º cliente:", i + 1);
                             nome = Console.ReadLine();
+                            Console.WriteLine("Digite a senha do {0}º cliente:", i + 1);
+                            senha = Console.ReadLine();
                             Console.WriteLine("Digite o endereço completo do {0}º cliente:", i + 1);
                             endereco = Console.ReadLine();
                             Console.WriteLine("Digite o CPF do {0}º cliente:", i + 1);
@@ -48,7 +50,7 @@ namespace VaiFundos
                             Console.WriteLine("Digite o telefone do {0}º cliente: ", i + 1);
                             telefone = Console.ReadLine();
 
-                            clientePadrao = new Cliente(clientes.Count(), nome, endereco, cpf, telefone, DateTime.Now);
+                            clientePadrao = new Cliente(clientes.Count(), nome, senha, endereco, cpf, telefone, DateTime.Now);
                             clientes.Add(clientePadrao);
                         }
                         Console.WriteLine("1 - Cadastrar clientes.");
@@ -102,4 +104,3 @@ namespace VaiFundos
         }
     }
 }
-

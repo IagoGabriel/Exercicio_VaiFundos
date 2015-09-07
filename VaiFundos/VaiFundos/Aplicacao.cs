@@ -8,21 +8,15 @@ namespace VaiFundos
 {
     class Aplicacao
     {
-        private int codAplicacao;
         private float valorAplicacao;
         private DateTime dataAplicacao;
         private float rendimento;
 
-        public Aplicacao(int increment, float valorAplicacao)
-        {
-            this.codAplicacao = increment + 1;    
+        public Aplicacao(float valorAplicacao)
+        {    
             this.valorAplicacao = valorAplicacao;
             this.dataAplicacao = DateTime.Now;
-        }
-
-        public int getCodAplicacao()
-        {
-            return codAplicacao;
+            this.rendimento = 0;
         }
 
         public float getValorAplicacao()

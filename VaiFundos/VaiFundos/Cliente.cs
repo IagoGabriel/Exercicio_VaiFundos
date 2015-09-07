@@ -11,17 +11,20 @@ namespace VaiFundos
     {
         private int codCliente;
         private String nome;
+        private String senha;
         private String endereco;
         private String cpf;
         private String telefone;
         private DateTime dataCadastro;
         List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
+        List<Resgate> resgates = new List<Resgate>();
 
-        public Cliente(int increment, String nome, String endereco, String cpf, String telefone, DateTime dataCadastro)
+        public Cliente(int increment, String nome, String senha, String endereco, String cpf, String telefone, DateTime dataCadastro)
         {
 
             this.codCliente = increment + 1;
             this.nome = nome;
+            this.senha = senha;
             this.endereco = endereco;
             this.cpf = cpf;
             this.telefone = telefone;
@@ -95,25 +98,30 @@ namespace VaiFundos
 
         public static void lerArquivo(List<Cliente> clientes)
         {
-            if (File.Exists("../../clientes.txt"))
+            try
             {
-                Stream arqDados = File.Open("../../clientes.txt", FileMode.Open);
-                StreamReader leitor = new StreamReader(arqDados);
-                String linha = leitor.ReadLine();
-                String[] separador;
-                Cliente clientePadrao;
-
-                while (linha != null)
+                if (File.Exists("../../clientes.txt"))
                 {
-                    separador = linha.Split(';');
-                    clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], separador[4], DateTime.Parse(separador[5]));
-                    linha = leitor.ReadLine();
-                    clientes.Add(clientePadrao);
+                    Stream arqDados = File.Open("../../clientes.txt", FileMode.Open);
+                    StreamReader leitor = new StreamReader(arqDados);
+                    String linha = leitor.ReadLine();
+                    String[] separador;
+                    Cliente clientePadrao;
+
+                    while (linha != null)
+                    {
+                        separador = linha.Split(';');
+                        clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], separador[4], separador[5],DateTime.Parse(separador[6]));
+                        linha = leitor.ReadLine();
+                        clientes.Add(clientePadrao);
+                    }
+
+
+                    leitor.Close();
+                    arqDados.Close();
                 }
-
-
-                leitor.Close();
-                arqDados.Close();
+            }catch(IOException io){
+                Console.WriteLine("\nOcorreu um erro: {0}", io);
             }
         }
 
@@ -124,7 +132,7 @@ namespace VaiFundos
 
             for (int i = 0; i < clientes.Count(); i++)
             {
-                escritor.WriteLine(clientes[i].codCliente + ";" + clientes[i].nome + ";" + clientes[i].endereco + ";" + clientes[i].cpf + ";" + clientes[i].telefone + ";" + clientes[i].dataCadastro.ToShortDateString());
+                escritor.WriteLine(clientes[i].codCliente + ";" + clientes[i].nome + ";" + clientes[i].senha + ";" + clientes[i].endereco + ";" + clientes[i].cpf + ";" + clientes[i].telefone + ";" + clientes[i].dataCadastro.ToShortDateString());
             }
 
             escritor.Close();
