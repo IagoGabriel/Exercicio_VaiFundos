@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace VaiFundos
 {
@@ -10,12 +11,13 @@ namespace VaiFundos
     {
         private int codInvestimento;
         private String nome;
-        private List<Aplicacao> aplicacao = new List<Aplicacao>();
         private Moeda moeda;
+
+        private List<Aplicacao> aplicacao = new List<Aplicacao>();
 
         public FundoInvestimento(int increment, String nome, Moeda moeda)
         {
-            this.codInvestimento = increment;
+            this.codInvestimento = increment+1;
             this.nome = nome;
             this.moeda = moeda;
         }
@@ -62,6 +64,87 @@ namespace VaiFundos
 
                     }
                 }
+            }
+
+        }
+
+        public static FundoInvestimento buscaFundo(List<FundoInvestimento> fundoInvestimento, int codigoInvestimento)
+        {
+            for (int i = 0; i < fundoInvestimento.Count(); i++)
+            {
+                if (codigoInvestimento.Equals(fundoInvestimento[i].getCodInvestimento()))
+                {
+                    return fundoInvestimento[i];
+                }
+            }
+
+            return null;
+        }
+
+        public static void imprimeListaFundos(List<FundoInvestimento> fundoInvestimento)
+        {
+            for (int i = 0; i < fundoInvestimento.Count(); i++)
+            {
+                Console.WriteLine("\nCódigo: {0}\nNome: {1}\nMoeda: {2}\n", fundoInvestimento[i].getCodInvestimento(), fundoInvestimento[i].nome, fundoInvestimento[i].getMoeda().getNomeMoeda());
+            }
+        }
+
+        public static void lerArquivo(List<FundoInvestimento> fundoInvestimento, Moeda dolar, Moeda real)
+        {
+            try
+            {
+                if (File.Exists("../../fundos.txt"))
+                {
+                    Stream arqDados = File.Open("../../fundos.txt", FileMode.Open);
+                    StreamReader leitor = new StreamReader(arqDados);
+                    String linha = leitor.ReadLine();
+                    String[] separador;
+                    FundoInvestimento fundoPadrao;
+
+                    while (linha != null)
+                    {
+                        separador = linha.Split(';');
+                        if (separador[2] == "real") { 
+                            fundoPadrao = new FundoInvestimento(fundoInvestimento.Count(), separador[1], real);
+                        }
+                        else
+                        {
+                            fundoPadrao = new FundoInvestimento(fundoInvestimento.Count(), separador[1], dolar);
+                        }
+                        linha = leitor.ReadLine();
+                        fundoInvestimento.Add(fundoPadrao);
+                    }
+
+
+                    leitor.Close();
+                    arqDados.Close();
+                }
+            }
+            catch (IOException io)
+            {
+                Console.WriteLine("\nOcorreu um erro: {0}", io);
+            }
+        }
+
+        public static void escreveArquivo(List<FundoInvestimento> fundoInvestimento)
+        {
+            try
+            {
+
+                FileStream arqDados = new FileStream("../../fundos.txt", FileMode.Create, FileAccess.Write);
+                StreamWriter escritor = new StreamWriter(arqDados, Encoding.UTF8);
+
+                for (int i = 0; i < fundoInvestimento.Count(); i++)
+                {
+                    escritor.WriteLine(fundoInvestimento[i].codInvestimento + ";" + fundoInvestimento[i].nome + ";" + fundoInvestimento[i].moeda.getNomeMoeda());
+                }
+
+                escritor.Close();
+                arqDados.Close();
+            }
+            catch (IOException io)
+            {
+                Console.WriteLine("\nOcorreu um erro: {0}", io);
             }
 
         }

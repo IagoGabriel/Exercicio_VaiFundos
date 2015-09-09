@@ -88,6 +88,19 @@ namespace VaiFundos
             return dataCadastro;
         }
 
+        public static Cliente buscaCliente(List<Cliente> clientes, int codigo)
+        {
+            for (int i = 0; i < clientes.Count(); i++)
+            {
+                if (codigo.Equals(clientes[i].getCodCliente()))
+                {
+                    return clientes[i];
+                }
+            }
+
+            return null;
+        }
+
         public static void imprimeListaCliente(List<Cliente> clientes)
         {
             for (int i = 0; i < clientes.Count(); i++)

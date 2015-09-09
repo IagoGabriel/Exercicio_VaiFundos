@@ -1,0 +1,3 @@
+﻿1;Poupança;real
+2;CDB;dolar
+3;CDI;real
