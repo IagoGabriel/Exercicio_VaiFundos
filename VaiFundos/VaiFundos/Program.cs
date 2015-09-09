@@ -44,6 +44,7 @@ namespace VaiFundos
                     Console.WriteLine("2 - Remover cliente.");
                     Console.WriteLine("3 - Cadastrar fundos de investimento.");
                     Console.WriteLine("4 - Remover fundos de investimento.");
+                    Console.WriteLine("5 - Remover fundos de investimento.");
                     opcaoBanco = int.Parse(Console.ReadLine());
 
                     while (opcaoBanco == 1 || opcaoBanco == 2 || opcaoBanco == 3 || opcaoBanco == 4)
