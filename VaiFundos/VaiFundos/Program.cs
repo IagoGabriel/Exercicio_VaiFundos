@@ -14,6 +14,7 @@ namespace VaiFundos
             List<Cliente> clientes = new List<Cliente>();
             List<Moeda> moedas = new List<Moeda>();
             List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
+            List<Aplicacao> aplicacao = new List <Aplicacao>();
 
             Real real = new Real(2, "real", "R$");
             Dolar dolar = new Dolar(3, "dolar", "U$");
@@ -44,7 +45,7 @@ namespace VaiFundos
                     Console.WriteLine("2 - Remover cliente.");
                     Console.WriteLine("3 - Cadastrar fundos de investimento.");
                     Console.WriteLine("4 - Remover fundos de investimento.");
-                    Console.WriteLine("5 - Remover fundos de investimento.");
+                    Console.WriteLine("5 - Realizar Aplicação.");
                     opcaoBanco = int.Parse(Console.ReadLine());
 
                     while (opcaoBanco == 1 || opcaoBanco == 2 || opcaoBanco == 3 || opcaoBanco == 4)
@@ -71,6 +72,7 @@ namespace VaiFundos
                             Console.WriteLine("2 - Remover cliente.");
                             Console.WriteLine("3 - Cadastrar fundos de investimento.");
                             Console.WriteLine("4 - Remover fundos de investimento.");
+                            Console.WriteLine("5 - Realizar Aplicação.")
                             opcaoBanco = int.Parse(Console.ReadLine());
                         }
                         else
@@ -148,6 +150,40 @@ namespace VaiFundos
                                             FundoInvestimento.escreveArquivo(fundoInvestimento);
                                         }
                                     }
+                                    else
+                                    {
+                                        if(opcaoBanco == 5)
+                                        Console.WriteLine("APLICÃÇÃO: ");
+                                        Aplicacao.imprimeListaAplicacao(aplicacao);
+
+                                        Console.WriteLine("Por favor, digite o Fundo de Investimento que deseja aplicar: ");
+                                        int codInvestimento = int.Parse(Console.ReadLine());
+
+                                        Console.WriteLine("Por favor, digite o valor a ser aplicacado: ");
+                                        int valorAplicacao = int.Parse(Console.ReadLine());
+
+                                        
+
+                                        while (Aplicacao.buscaAplicacao(aplicacao, codInvestimento) == null)
+                                        {
+                                            Console.WriteLine("Aplicação não existe! ");
+                                            codInvestimento = int.Parse(Console.ReadLine());
+                                        }
+
+
+                                        // Porque apenas o banco que pode fazer a aplicação, o cliente só leve o cash kk 
+                                        // Tem como excluir uma aplicação ? Caso o valor seja errado :S 
+                                        Console.WriteLine("Tem certeza que deseja excluir a aplicação {0}?", Aplicacao.buscaAplicacao(aplicacao, codInvestimento);
+                                        Console.WriteLine("1 - Sim.");
+                                        Console.WriteLine("2 - Não.");
+                                        int deletaAplicacao= int.Parse(Console.ReadLine());
+
+                                        if (deletaAplicacao == 1)
+                                        {
+                                            
+                                            Aplicacao.escreveArquivo(aplicacao);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -156,6 +192,7 @@ namespace VaiFundos
                         Console.WriteLine("2 - Remover cliente.");
                         Console.WriteLine("3 - Cadastrar fundos de investimento.");
                         Console.WriteLine("4 - Remover fundos de investimento.");
+                        Console.WriteLine("5 - Realizar Aplicação.");
                         opcaoBanco = int.Parse(Console.ReadLine());
 
                     }
