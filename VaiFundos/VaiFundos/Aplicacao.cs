@@ -14,7 +14,7 @@ namespace VaiFundos
         private DateTime dataAplicacao;
         private float rendimento;
 
-        public Aplicacao( float valorAplicacao, int codInvestimento, DateTime dataAplicacao, float rendimento)
+        public Aplicacao (float valorAplicacao, int codInvestimento)
         {
             this.valorAplicacao = valorAplicacao;
             this.codInvestimento = codInvestimento;
@@ -101,7 +101,7 @@ namespace VaiFundos
                     {
                         separador = linha.Split(';');
                        
-                            aplicacaoPadrao = new Aplicacao(float.Parse(separador[0]), int.Parse(separador[1]), DateTime.Parse(separador[2]), float.Parse(separador[3]));
+                            aplicacaoPadrao = new Aplicacao(float.Parse(separador[0]), int.Parse(separador[1]));
                      
                         linha = leitor.ReadLine();
                         aplicacao.Add(aplicacaoPadrao);
@@ -129,17 +129,15 @@ namespace VaiFundos
         public static List<Aplicacao> buscaAplicacao(List<Aplicacao> aplicacao, int codInvestimento)
         {
             List<Aplicacao> aplicacaoCod = null;
-            
+
             for (int i = 0; i < aplicacao.Count(); i++)
             {
                 if (codInvestimento.Equals(aplicacao[i].getCodInvestimento()))
                 {
                     aplicacaoCod.Add(aplicacao[i]);
-                    // paramos aqui pela amor de Deus 
                 }
             }
-
-            return null;
+            return aplicacaoCod;
         }
     }
 }

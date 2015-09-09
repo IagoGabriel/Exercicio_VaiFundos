@@ -13,13 +13,13 @@ namespace VaiFundos
         private String nome;
         private String senha;
         private String endereco;
-        private String cpf;
+        private int cpf;
         private String telefone;
         private DateTime dataCadastro;
         List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
         List<Resgate> resgates = new List<Resgate>();
 
-        public Cliente(int increment, String nome, String senha, String endereco, String cpf, String telefone, DateTime dataCadastro)
+        public Cliente(int increment, String nome, String senha, String endereco, int cpf, String telefone, DateTime dataCadastro)
         {
 
             this.codCliente = increment + 1;
@@ -48,6 +48,11 @@ namespace VaiFundos
             return nome;
         }
 
+        public String getSenha()
+        {
+            return senha;
+        }
+
         public void setEndereco(String endereco)
         {
             this.endereco = endereco;
@@ -58,12 +63,12 @@ namespace VaiFundos
             return endereco;
         }
 
-        public void setCpf(String cpf)
+        public void setCpf(int cpf)
         {
             this.cpf = cpf;
         }
 
-        public String getCpf()
+        public int getCpf()
         {
             return cpf;
         }
@@ -88,11 +93,30 @@ namespace VaiFundos
             return dataCadastro;
         }
 
+        public void realizarAplicacao(Aplicacao aplicacao, int codInvestimento)
+        {
+            FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao();
+            
+        }
+
         public static Cliente buscaCliente(List<Cliente> clientes, int codigo)
         {
             for (int i = 0; i < clientes.Count(); i++)
             {
                 if (codigo.Equals(clientes[i].getCodCliente()))
+                {
+                    return clientes[i];
+                }
+            }
+
+            return null;
+        }
+
+        public static Cliente buscaClienteCpf(List<Cliente> clientes, int cpf)
+        {
+            for (int i = 0; i < clientes.Count(); i++)
+            {
+                if (cpf.Equals(clientes[i].getCpf()))
                 {
                     return clientes[i];
                 }
@@ -124,7 +148,7 @@ namespace VaiFundos
                     while (linha != null)
                     {
                         separador = linha.Split(';');
-                        clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], separador[4], separador[5],DateTime.Parse(separador[6]));
+                        clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], int.Parse(separador[4]), separador[5],DateTime.Parse(separador[6]));
                         linha = leitor.ReadLine();
                         clientes.Add(clientePadrao);
                     }
@@ -152,9 +176,5 @@ namespace VaiFundos
             arqDados.Close();
 
         }
-
-
     }
-
-
 }

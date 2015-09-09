@@ -47,6 +47,21 @@ namespace VaiFundos
             this.aplicacao.Add(aplicacao);
         }
 
+        public Aplicacao buscaAplicacao(int codigoInvestimento)
+        {
+            List<Aplicacao> aplicacaoCod = null;
+            //PARAMOS AQUI, NO DIA 09-09-15 ÀS 18:34!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            for (int i = 0; i < this.aplicacao.Count(); i++)
+            {
+                if (codigoInvestimento.Equals(aplicacao[i].getCodInvestimento()))
+                {
+                    return aplicacao[i];
+                }
+            }
+
+            return null;
+        }
+
         public int tempoTotalCadastro(Cliente cliente)
         {
             TimeSpan totalCadastro = DateTime.Parse(DateTime.Now.ToShortDateString()) - DateTime.Parse(cliente.getDataCadastro().ToShortDateString());
@@ -70,9 +85,9 @@ namespace VaiFundos
 
         public static FundoInvestimento buscaFundo(List<FundoInvestimento> fundoInvestimento, int codigoInvestimento)
         {
-            for (int i = 0; i < fundoInvestimento.Count(); i++)
+            for(int i = 0; i < fundoInvestimento.Count(); i++)
             {
-                if (codigoInvestimento.Equals(fundoInvestimento[i].getCodInvestimento()))
+                if(codigoInvestimento.Equals(fundoInvestimento[i].getCodInvestimento()))
                 {
                     return fundoInvestimento[i];
                 }
