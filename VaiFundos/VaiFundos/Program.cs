@@ -15,20 +15,20 @@ namespace VaiFundos
             List<Moeda> moedas = new List<Moeda>();
             List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
 
-            FundoInvestimento.lerArquivo(fundoInvestimento, moedas[0], moedas[1]);
-            Cliente.lerArquivo(clientes);
-
             Real real = new Real(2, "real", "R$");
             Dolar dolar = new Dolar(3, "dolar", "U$");
 
             moedas.Add(real);
             moedas.Add(dolar);
-            
+
+            FundoInvestimento.lerArquivo(fundoInvestimento, moedas[0], moedas[1]);
+            Cliente.lerArquivo(clientes);
+
             Aplicacao aplicacao = null;
             Cliente clientePadrao = null;
             FundoInvestimento novo = null;
 
-            int opcao = -1, opcaoBanco = -1, opcaoCliente = -1, cpf;            
+            int opcao = -1, opcaoBanco = -1, opcaoCliente = -1, cpf, cpfCliente = 0;           
             String nome, senha, endereco, telefone;
            
 
@@ -174,7 +174,7 @@ namespace VaiFundos
                         Console.WriteLine("CPF: ");
                         String tempCpf = Console.ReadLine().Replace(".", "");
                         tempCpf = tempCpf.Replace("-", "");
-                        int cpfCliente = int.Parse(tempCpf);
+                        cpfCliente = int.Parse(tempCpf);
                         while (Cliente.buscaClienteCpf(clientes, cpfCliente) == null)
                         {
                             Console.WriteLine("Esse CPF {0} não existe! Favor inserir um novo CPF: ", cpfCliente);
@@ -219,33 +219,36 @@ namespace VaiFundos
 
                                 if(incluiAplicacao == 1)
                                 {
-                                    Cliente.buscaCliente(clientes, cpfCliente).getNome())
+
+                                    Aplicacao.imprimeListaAplicacao(Cliente.buscaCliente(clientes, cpfCliente).realizarAplicacao(aplicacao,codInvestimento));
+                                    //Cliente.buscaCliente(clientes, cpfCliente).realizarAplicacao(aplicacao,codInvestimento);
                                     FundoInvestimento.escreveArquivo(fundoInvestimento);
                                 }
 
-                            
-
-                                        
-
-                                while (Aplicacao.buscaAplicacao(aplicacao, codInvestimento) == null)
-                                {
-                                    Console.WriteLine("Aplicação não existe! ");
-                                    codInvestimento = int.Parse(Console.ReadLine());
-                                }
 
 
-                                // Porque apenas o banco que pode fazer a aplicação, o cliente só leve o cash kk 
-                                // Tem como excluir uma aplicação ? Caso o valor seja errado :S 
-                                Console.WriteLine("Tem certeza que deseja excluir a aplicação {0}?", Aplicacao.buscaAplicacao(aplicacao, codInvestimento);
-                                Console.WriteLine("1 - Sim.");
-                                Console.WriteLine("2 - Não.");
-                                int deletaAplicacao= int.Parse(Console.ReadLine());
 
-                                if (deletaAplicacao == 1)
-                                {
+
+                                /* while (Aplicacao.buscaAplicacao(aplicacao, codInvestimento) == null)
+                                 {
+                                     Console.WriteLine("Aplicação não existe! ");
+                                     codInvestimento = int.Parse(Console.ReadLine());
+                                 }
+
+
+                                 // Porque apenas o banco que pode fazer a aplicação, o cliente só leve o cash kk 
+                                 // Tem como excluir uma aplicação ? Caso o valor seja errado :S 
+                                 Console.WriteLine("Tem certeza que deseja excluir a aplicação {0}?", Aplicacao.buscaAplicacao(aplicacao, codInvestimento);
+                                 Console.WriteLine("1 - Sim.");
+                                 Console.WriteLine("2 - Não.");
+                                 int deletaAplicacao= int.Parse(Console.ReadLine());
+
+                                 if (deletaAplicacao == 1)
+                                 {
                                             
-                                    Aplicacao.escreveArquivo(aplicacao);
-                                }
+                                     Aplicacao.escreveArquivo(aplicacao);
+                                 }
+                                 */
                             }
                         }
                     }

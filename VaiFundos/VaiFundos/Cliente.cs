@@ -93,9 +93,9 @@ namespace VaiFundos
             return dataCadastro;
         }
 
-        public void realizarAplicacao(Aplicacao aplicacao, int codInvestimento)
+        public List<Aplicacao> realizarAplicacao(Aplicacao aplicacao, int codInvestimento)
         {
-            FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao();
+            return FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao();
             
         }
 

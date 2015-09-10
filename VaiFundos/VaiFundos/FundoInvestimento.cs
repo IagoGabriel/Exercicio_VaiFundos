@@ -47,9 +47,11 @@ namespace VaiFundos
             this.aplicacao.Add(aplicacao);
         }
 
-        public Aplicacao buscaAplicacao(int codigoInvestimento)
+        public List<Aplicacao> buscaAplicacao( )
         {
-            List<Aplicacao> aplicacaoCod = null;
+
+            return aplicacao;
+            /*List<Aplicacao> aplicacaoCod = null;
             //PARAMOS AQUI, NO DIA 09-09-15 ÀS 18:34!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             for (int i = 0; i < this.aplicacao.Count(); i++)
             {
@@ -59,7 +61,7 @@ namespace VaiFundos
                 }
             }
 
-            return null;
+            return null;*/
         }
 
         public int tempoTotalCadastro(Cliente cliente)
