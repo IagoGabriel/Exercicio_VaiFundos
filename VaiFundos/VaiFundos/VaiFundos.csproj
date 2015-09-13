@@ -55,6 +55,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="aplicacoes.txt" />
     <Content Include="clientes.txt" />
     <Content Include="fundos.txt" />
   </ItemGroup>

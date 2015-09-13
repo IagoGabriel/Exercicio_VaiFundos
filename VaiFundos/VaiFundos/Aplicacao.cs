@@ -13,15 +13,16 @@ namespace VaiFundos
         private int  codInvestimento;
         private DateTime dataAplicacao;
         private float rendimento;
+		private int codCliente;
 
-        public Aplicacao (float valorAplicacao, int codInvestimento)
+        public Aplicacao (float valorAplicacao, int codInvestimento, DateTime dataAplicacao, float rendimento, int codCliente)
         {
             this.valorAplicacao = valorAplicacao;
             this.codInvestimento = codInvestimento;
-            this.dataAplicacao = DateTime.Now;
-            this.rendimento = 0;
+			this.dataAplicacao = dataAplicacao;
+			this.rendimento = rendimento;
+            this.codCliente = codCliente;
         }
-
 
         public void setCodInvestimento(int codInvestimento)
         {
@@ -39,7 +40,6 @@ namespace VaiFundos
         }
 
         public void setDataAplicacao(DateTime dataAplicacao)
-           
         {
             this.dataAplicacao = dataAplicacao;
         }
@@ -50,7 +50,6 @@ namespace VaiFundos
         }
 
         public void setRendimento(float rendimento)
-
         {
             this.rendimento = rendimento;
         }
@@ -60,18 +59,21 @@ namespace VaiFundos
             return rendimento;
         }
 
+		public int getCodCliente()
+		{
+			return codCliente;
+		}
 
-        public static void escreveArquivo(List<Aplicacao> aplicacao)
+		public static void escreveArquivo(List<Aplicacao> aplicacao)
         {
             try
             {
-
                 FileStream arqDados = new FileStream("../../aplicacao.txt", FileMode.Create, FileAccess.Write);
                 StreamWriter escritor = new StreamWriter(arqDados, Encoding.UTF8);
 
                 for (int i = 0; i < aplicacao.Count(); i++)
                 {
-                    escritor.WriteLine(aplicacao[i].valorAplicacao + ";" + aplicacao[i].codInvestimento + ";" + aplicacao[i].dataAplicacao + ";" + aplicacao[i].rendimento + ";");
+                    escritor.WriteLine(aplicacao[i].valorAplicacao + ";" + aplicacao[i].codInvestimento + ";" + aplicacao[i].dataAplicacao.ToShortDateString() + ";" + aplicacao[i].rendimento + ";" + aplicacao[i].codCliente);
                 }
 
                 escritor.Close();
@@ -84,11 +86,10 @@ namespace VaiFundos
 
         }
 
-        public static List<Aplicacao> lerArquivo()
+        public static void lerArquivo(List<Aplicacao> aplicacao)
         {
             try
             {
-                List<Aplicacao> aplicacao = null; 
                 if (File.Exists("../../aplicacao.txt"))
                 {
                     Stream arqDados = File.Open("../../aplicacao.txt", FileMode.Open);
@@ -101,7 +102,7 @@ namespace VaiFundos
                     {
                         separador = linha.Split(';');
                        
-                            aplicacaoPadrao = new Aplicacao(float.Parse(separador[0]), int.Parse(separador[1]));
+                        aplicacaoPadrao = new Aplicacao(float.Parse(separador[0]), int.Parse(separador[1]), DateTime.Parse(separador[2]), float.Parse(separador[3]), int.Parse(separador[4]));
                      
                         linha = leitor.ReadLine();
                         aplicacao.Add(aplicacaoPadrao);
@@ -110,12 +111,10 @@ namespace VaiFundos
                     leitor.Close();
                     arqDados.Close();
                 }
-                return aplicacao;
             }
             catch (IOException io)
             {
                 Console.WriteLine("\nOcorreu um erro: {0}", io);
-                return null;
             }
         }
 
@@ -140,5 +139,19 @@ namespace VaiFundos
             }
             return aplicacaoCod;
         }
-    }
+
+		public static List<Aplicacao> buscaAplicacaoCliente(List<Aplicacao> aplicacao, int codCliente)
+		{
+			List<Aplicacao> aplicacaoCod = null;
+
+			for (int i = 0; i < aplicacao.Count(); i++)
+			{
+				if (codCliente.Equals(aplicacao[i].getCodCliente()))
+				{
+					aplicacaoCod.Add(aplicacao[i]);
+				}
+			}
+			return aplicacaoCod;
+		}
+	}
 }

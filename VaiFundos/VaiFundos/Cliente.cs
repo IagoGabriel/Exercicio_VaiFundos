@@ -21,7 +21,6 @@ namespace VaiFundos
 
         public Cliente(int increment, String nome, String senha, String endereco, double cpf, String telefone, DateTime dataCadastro)
         {
-
             this.codCliente = increment + 1;
             this.nome = nome;
             this.senha = senha;
@@ -31,7 +30,6 @@ namespace VaiFundos
             this.dataCadastro = dataCadastro;
 			this.fundoInvestimento = new List<FundoInvestimento>();
 		}
-
 
         public int getCodCliente()
         {
@@ -100,10 +98,9 @@ namespace VaiFundos
 
 		public List<Aplicacao> realizarAplicacao(Aplicacao aplicacao, int codInvestimento)
 		{
-			
+			this.fundoInvestimento.Add(FundoInvestimento.buscaFundo(fundoInvestimento, codInvestimento));
 			FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao().Add(aplicacao);
 			return FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao();
-            
         }
 
         public static Cliente buscaCliente(List<Cliente> clientes, int codigo)
@@ -151,12 +148,58 @@ namespace VaiFundos
                     String linha = leitor.ReadLine();
                     String[] separador;
                     Cliente clientePadrao;
+					FundoInvestimento novoFundo = null;
 
-                    while (linha != null)
+					List<Aplicacao> aplicacoes = new List<Aplicacao>();
+					List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
+
+					Real real = new Real(2, "real", "R$");
+					Dolar dolar = new Dolar(3, "dolar", "U$");
+
+					Aplicacao.lerArquivo(aplicacoes);
+					FundoInvestimento.lerArquivo(fundoInvestimento, dolar, real);
+
+					bool verifica = false;
+
+					while (linha != null)
                     {
                         separador = linha.Split(';');
                         clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], Convert.ToDouble(separador[4]), separador[5],DateTime.Parse(separador[6]));
-                        linha = leitor.ReadLine();
+						
+						for (int i=0;i< Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente).Count();i++)
+						{
+							for (int j=0;j<fundoInvestimento.Count();j++)
+							{
+								if (Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i].getCodInvestimento().Equals(fundoInvestimento[j].getCodInvestimento()))
+								{
+									if (fundoInvestimento[j].getMoeda().getNomeMoeda().Equals("real")){
+										novoFundo = new FundoInvestimento(fundoInvestimento[j].getCodInvestimento() - 1, fundoInvestimento[j].getNome(), real);
+									}
+									else
+									{
+										novoFundo = new FundoInvestimento(fundoInvestimento[j].getCodInvestimento() - 1, fundoInvestimento[j].getNome(), dolar);
+									}
+								}
+								
+								for(int k=0;k<clientePadrao.fundoInvestimento.Count();k++)
+								{
+									if (clientePadrao.fundoInvestimento[k].getCodInvestimento().Equals(fundoInvestimento[j].getCodInvestimento()))
+									{
+										verifica = true;
+									}
+								}
+								if (verifica)
+								{
+									FundoInvestimento.buscaFundo(clientePadrao.fundoInvestimento, fundoInvestimento[j].getCodInvestimento()).buscaAplicacao().Add(Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i]);
+								}
+								else
+								{
+									novoFundo.buscaAplicacao().Add(Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i]);
+									clientePadrao.fundoInvestimento.Add(novoFundo);
+								}
+							}
+						}
+						linha = leitor.ReadLine();
                         clientes.Add(clientePadrao);
                     }
 

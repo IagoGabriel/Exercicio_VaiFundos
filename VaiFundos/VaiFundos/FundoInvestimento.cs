@@ -118,7 +118,6 @@ namespace VaiFundos
                             fundoPadrao = new FundoInvestimento(fundoInvestimento.Count(), separador[1], dolar);
                         }
                         linha = leitor.ReadLine();
-                        fundoPadrao.aplicacao = null ;
                         fundoInvestimento.Add(fundoPadrao);
                     }
 
