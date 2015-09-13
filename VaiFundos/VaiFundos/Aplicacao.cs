@@ -118,6 +118,7 @@ namespace VaiFundos
                 return null;
             }
         }
+
         public static void imprimeListaAplicacao(List<Aplicacao> aplicacao)
         {
             for (int i = 0; i < aplicacao.Count(); i++)

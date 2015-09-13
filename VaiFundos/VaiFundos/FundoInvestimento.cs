@@ -13,13 +13,15 @@ namespace VaiFundos
         private String nome;
         private Moeda moeda;
 
-        private List<Aplicacao> aplicacao = new List<Aplicacao>();
+		private List<Aplicacao> aplicacao;
 
         public FundoInvestimento(int increment, String nome, Moeda moeda)
         {
             this.codInvestimento = increment+1;
             this.nome = nome;
             this.moeda = moeda;
+			this.aplicacao = new List<Aplicacao>();
+
         }
 
         public int getCodInvestimento()
@@ -47,21 +49,9 @@ namespace VaiFundos
             this.aplicacao.Add(aplicacao);
         }
 
-        public List<Aplicacao> buscaAplicacao( )
+        public List<Aplicacao> buscaAplicacao()
         {
-
             return aplicacao;
-            /*List<Aplicacao> aplicacaoCod = null;
-            //PARAMOS AQUI, NO DIA 09-09-15 ÀS 18:34!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            for (int i = 0; i < this.aplicacao.Count(); i++)
-            {
-                if (codigoInvestimento.Equals(aplicacao[i].getCodInvestimento()))
-                {
-                    return aplicacao[i];
-                }
-            }
-
-            return null;*/
         }
 
         public int tempoTotalCadastro(Cliente cliente)
@@ -78,11 +68,10 @@ namespace VaiFundos
                 {
                     if (tempoTotalCadastro(cliente) >= 365)
                     {
-
+						//FALTA FAZER!!!!!!!!!!!!
                     }
                 }
             }
-
         }
 
         public static FundoInvestimento buscaFundo(List<FundoInvestimento> fundoInvestimento, int codigoInvestimento)
@@ -167,6 +156,14 @@ namespace VaiFundos
 
         }
 
-    }
+		public static void imprimeListaAplicacao(List<Aplicacao> aplicacao)
+		{
+			for (int i = 0; i < aplicacao.Count(); i++)
+			{
+				Console.WriteLine("\nValor Aplicação: {0}\nCódigo Investimento: {1}\nData Aplicaçao: {2}\nRendimento: {3}\n", aplicacao[i].getValorAplicacao(), aplicacao[i].getCodInvestimento(), aplicacao[i].getDataAplicacao(), aplicacao[i].getRendimento());
+			}
+		}
+
+	}
 }
 

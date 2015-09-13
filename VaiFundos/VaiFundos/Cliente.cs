@@ -13,13 +13,13 @@ namespace VaiFundos
         private String nome;
         private String senha;
         private String endereco;
-        private int cpf;
+        private double cpf;
         private String telefone;
         private DateTime dataCadastro;
-        List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
+        List<FundoInvestimento> fundoInvestimento;
         List<Resgate> resgates = new List<Resgate>();
 
-        public Cliente(int increment, String nome, String senha, String endereco, int cpf, String telefone, DateTime dataCadastro)
+        public Cliente(int increment, String nome, String senha, String endereco, double cpf, String telefone, DateTime dataCadastro)
         {
 
             this.codCliente = increment + 1;
@@ -29,8 +29,8 @@ namespace VaiFundos
             this.cpf = cpf;
             this.telefone = telefone;
             this.dataCadastro = dataCadastro;
-
-        }
+			this.fundoInvestimento = new List<FundoInvestimento>();
+		}
 
 
         public int getCodCliente()
@@ -63,12 +63,12 @@ namespace VaiFundos
             return endereco;
         }
 
-        public void setCpf(int cpf)
+        public void setCpf(double cpf)
         {
             this.cpf = cpf;
         }
 
-        public int getCpf()
+        public double getCpf()
         {
             return cpf;
         }
@@ -93,9 +93,16 @@ namespace VaiFundos
             return dataCadastro;
         }
 
-        public List<Aplicacao> realizarAplicacao(Aplicacao aplicacao, int codInvestimento)
-        {
-            return FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao();
+		public List<FundoInvestimento> getFundoInvestimento()
+		{
+			return fundoInvestimento;
+        }
+
+		public List<Aplicacao> realizarAplicacao(Aplicacao aplicacao, int codInvestimento)
+		{
+			
+			FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao().Add(aplicacao);
+			return FundoInvestimento.buscaFundo(this.fundoInvestimento, codInvestimento).buscaAplicacao();
             
         }
 
@@ -112,7 +119,7 @@ namespace VaiFundos
             return null;
         }
 
-        public static Cliente buscaClienteCpf(List<Cliente> clientes, int cpf)
+        public static Cliente buscaClienteCpf(List<Cliente> clientes, double cpf)
         {
             for (int i = 0; i < clientes.Count(); i++)
             {
@@ -148,11 +155,10 @@ namespace VaiFundos
                     while (linha != null)
                     {
                         separador = linha.Split(';');
-                        clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], int.Parse(separador[4]), separador[5],DateTime.Parse(separador[6]));
+                        clientePadrao = new Cliente(clientes.Count(), separador[1], separador[2], separador[3], Convert.ToDouble(separador[4]), separador[5],DateTime.Parse(separador[6]));
                         linha = leitor.ReadLine();
                         clientes.Add(clientePadrao);
                     }
-
 
                     leitor.Close();
                     arqDados.Close();

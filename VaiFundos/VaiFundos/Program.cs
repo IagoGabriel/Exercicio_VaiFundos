@@ -28,11 +28,11 @@ namespace VaiFundos
             Cliente clientePadrao = null;
             FundoInvestimento novo = null;
 
-            int opcao = -1, opcaoBanco = -1, opcaoCliente = -1, cpf, cpfCliente = 0;           
+			int opcao = -1, opcaoBanco = -1, opcaoCliente = -1;        
             String nome, senha, endereco, telefone;
-           
+			double cpf, cpfCliente = 0;
 
-            Console.WriteLine("Por favor, selecione a opção:");
+			Console.WriteLine("Por favor, selecione a opção:");
             Console.WriteLine("1 - Banco."); //TERÁ DE VALIDAR SE É O BANCO MESMO
             Console.WriteLine("2 - Cliente."); //TERÁ DE VALIDAR SE É O CLIENTE MESMO
             opcao = int.Parse(Console.ReadLine());
@@ -61,7 +61,7 @@ namespace VaiFundos
                                 Console.WriteLine("Digite o endereço completo do {0}º cliente:", i + 1);
                                 endereco = Console.ReadLine();
                                 Console.WriteLine("Digite o CPF do {0}º cliente:", i + 1);
-                                cpf = int.Parse(Console.ReadLine());
+                                cpf = Convert.ToDouble(Console.ReadLine());
                                 Console.WriteLine("Digite o telefone do {0}º cliente: ", i + 1);
                                 telefone = Console.ReadLine();
 
@@ -174,22 +174,24 @@ namespace VaiFundos
                         Console.WriteLine("CPF: ");
                         String tempCpf = Console.ReadLine().Replace(".", "");
                         tempCpf = tempCpf.Replace("-", "");
-                        cpfCliente = int.Parse(tempCpf);
+                        cpfCliente = Convert.ToDouble(tempCpf);
                         while (Cliente.buscaClienteCpf(clientes, cpfCliente) == null)
                         {
                             Console.WriteLine("Esse CPF {0} não existe! Favor inserir um novo CPF: ", cpfCliente);
-                            cpfCliente = int.Parse(Console.ReadLine());
-                        }
+							tempCpf = Console.ReadLine().Replace(".", "");
+							tempCpf = tempCpf.Replace("-", "");
+							cpfCliente = Convert.ToDouble(tempCpf);
+						}
 
-                        Console.WriteLine("Senha: ");
+						Console.WriteLine("Senha: ");
                         String senhaCliente = Convert.ToString(Console.ReadLine());
-                        while(!(senhaCliente.Equals(Cliente.buscaCliente(clientes, cpfCliente).getSenha())))
+                        while(!(senhaCliente.Equals(Cliente.buscaClienteCpf(clientes, cpfCliente).getSenha())))
                         {
                             Console.WriteLine("Senha incorreta! Favor digitar a senha: ");
                             senhaCliente = Convert.ToString(Console.ReadLine());
                         }
 
-                        if((senhaCliente.Equals(Cliente.buscaCliente(clientes, cpfCliente).getSenha()))){
+                        if((senhaCliente.Equals(Cliente.buscaClienteCpf(clientes, cpfCliente).getSenha()))){
 
                             Console.WriteLine("1 - Realizar aplicação.");
                             Console.WriteLine("2 - Realizar resgate.");
@@ -200,7 +202,7 @@ namespace VaiFundos
                             if(opcaoCliente == 1){
                                 Console.WriteLine("Aplicação: ");
                                 Console.WriteLine("Por favor, digite o valor a ser aplicacado: ");
-                                float valorAplicacao = int.Parse(Console.ReadLine());
+                                float valorAplicacao = float.Parse(Console.ReadLine());
                                 Console.WriteLine("Por favor, digite o código do Fundo de Investimento que deseja aplicar: ");
                                 FundoInvestimento.imprimeListaFundos(fundoInvestimento);
                                 int codInvestimento = int.Parse(Console.ReadLine());                        
@@ -212,29 +214,25 @@ namespace VaiFundos
 
                                 aplicacao = new Aplicacao(valorAplicacao, codInvestimento);
 
-                                Console.WriteLine("{0}, tem certeza que deseja incluir essa aplicação de R${1} nesse fundo {2}?", Cliente.buscaCliente(clientes, cpfCliente).getNome(), valorAplicacao, FundoInvestimento.buscaFundo(fundoInvestimento, codInvestimento).getNome());
+                                Console.WriteLine("{0}, tem certeza que deseja incluir essa aplicação de R${1} nesse fundo {2}?", Cliente.buscaClienteCpf(clientes, cpfCliente).getNome(), valorAplicacao, FundoInvestimento.buscaFundo(fundoInvestimento, codInvestimento).getNome());
                                 Console.WriteLine("1 - Sim.");
                                 Console.WriteLine("2 - Não.");
                                 int incluiAplicacao = int.Parse(Console.ReadLine());
 
                                 if(incluiAplicacao == 1)
                                 {
-
-                                    Aplicacao.imprimeListaAplicacao(Cliente.buscaCliente(clientes, cpfCliente).realizarAplicacao(aplicacao,codInvestimento));
-                                    //Cliente.buscaCliente(clientes, cpfCliente).realizarAplicacao(aplicacao,codInvestimento);
+									Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento().Add(FundoInvestimento.buscaFundo(fundoInvestimento, codInvestimento));
+									FundoInvestimento.buscaFundo(Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento(), codInvestimento).buscaAplicacao().Add(aplicacao);
+									FundoInvestimento.imprimeListaAplicacao(FundoInvestimento.buscaFundo(Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento(), codInvestimento).buscaAplicacao());
                                     FundoInvestimento.escreveArquivo(fundoInvestimento);
+
                                 }
-
-
-
-
 
                                 /* while (Aplicacao.buscaAplicacao(aplicacao, codInvestimento) == null)
                                  {
                                      Console.WriteLine("Aplicação não existe! ");
                                      codInvestimento = int.Parse(Console.ReadLine());
                                  }
-
 
                                  // Porque apenas o banco que pode fazer a aplicação, o cliente só leve o cash kk 
                                  // Tem como excluir uma aplicação ? Caso o valor seja errado :S 
@@ -254,7 +252,6 @@ namespace VaiFundos
                     }
                 }
             }
-
 
             Console.ReadKey();
 
