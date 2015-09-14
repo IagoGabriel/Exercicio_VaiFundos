@@ -201,6 +201,7 @@ namespace VaiFundos
 						}
 						linha = leitor.ReadLine();
                         clientes.Add(clientePadrao);
+                        verifica = false;
                     }
 
                     leitor.Close();

@@ -14,7 +14,7 @@ namespace VaiFundos
             List<Cliente> clientes = new List<Cliente>();
             List<Moeda> moedas = new List<Moeda>();
             List<FundoInvestimento> fundoInvestimento = new List<FundoInvestimento>();
-			List<Aplicacao> aplicacoes = new List<Aplicacao>();
+            List<Aplicacao> aplicacoes = new List<Aplicacao>();
 
             Real real = new Real(2, "real", "R$");
             Dolar dolar = new Dolar(3, "dolar", "U$");
@@ -22,16 +22,20 @@ namespace VaiFundos
             moedas.Add(real);
             moedas.Add(dolar);
 
-            //FundoInvestimento.lerArquivo(fundoInvestimento, moedas[0], moedas[1]);
-            //Cliente.lerArquivo(clientes);
+            FundoInvestimento.lerArquivo(fundoInvestimento, moedas[0], moedas[1]);
+            Cliente.lerArquivo(clientes);
 
             Aplicacao aplicacao = null;
             Cliente clientePadrao = null;
             FundoInvestimento novo = null;
 
-			int opcao = -1, opcaoBanco = -1, opcaoCliente = -1;        
+			int opcao = -1, opcaoBanco = -1, opcaoCliente = -1;         
             String nome, senha, endereco, telefone;
 			double cpf, cpfCliente = 0;
+
+            bool verifica = true;
+            String tempCpf = "";
+            String senhaCliente = "";
 
 			Console.WriteLine("Por favor, selecione a opção:");
             Console.WriteLine("1 - Banco."); //TERÁ DE VALIDAR SE É O BANCO MESMO
@@ -42,6 +46,7 @@ namespace VaiFundos
             {
                 if (opcao == 1)
                 {
+                    verifica = true;
                     Console.WriteLine("1 - Cadastrar clientes.");
                     Console.WriteLine("2 - Remover cliente.");
                     Console.WriteLine("3 - Cadastrar fundos de investimento.");
@@ -152,7 +157,8 @@ namespace VaiFundos
                                         }
                                     }
                                     else
-                                    {
+                                    { 
+
                                         
                                     }
                                 }
@@ -169,11 +175,13 @@ namespace VaiFundos
                 {
                     if (opcao == 2)
                     {
-                        Console.WriteLine("Por favor, digite os dados: ");
-                        Console.WriteLine("CPF: ");
-                        String tempCpf = Console.ReadLine().Replace(".", "");
-                        tempCpf = tempCpf.Replace("-", "");
-                        cpfCliente = Convert.ToDouble(tempCpf);
+                        if(verifica){
+                            Console.WriteLine("Por favor, digite os dados: ");
+                            Console.WriteLine("CPF: ");
+                            tempCpf = Console.ReadLine().Replace(".", "");
+                            tempCpf = tempCpf.Replace("-", "");
+                            cpfCliente = Convert.ToDouble(tempCpf);
+                        }
                         while (Cliente.buscaClienteCpf(clientes, cpfCliente) == null)
                         {
                             Console.WriteLine("Esse CPF {0} não existe! Favor inserir um novo CPF: ", cpfCliente);
@@ -181,9 +189,12 @@ namespace VaiFundos
 							tempCpf = tempCpf.Replace("-", "");
 							cpfCliente = Convert.ToDouble(tempCpf);
 						}
-
-						Console.WriteLine("Senha: ");
-                        String senhaCliente = Convert.ToString(Console.ReadLine());
+                        if (verifica)
+                        {
+                            Console.WriteLine("Senha: ");
+                            senhaCliente = Convert.ToString(Console.ReadLine());
+                            verifica = false;
+                        }
                         while(!(senhaCliente.Equals(Cliente.buscaClienteCpf(clientes, cpfCliente).getSenha())))
                         {
                             Console.WriteLine("Senha incorreta! Favor digitar a senha: ");
@@ -195,7 +206,7 @@ namespace VaiFundos
                             Console.WriteLine("1 - Realizar aplicação.");
                             Console.WriteLine("2 - Realizar resgate.");
                             Console.WriteLine("3 - Histórico de aplicações.");
-                            Console.WriteLine("3 - Histórico de resgates.");
+                            Console.WriteLine("4 - Histórico de resgates.");
                             opcaoCliente = int.Parse(Console.ReadLine());
 
                             if(opcaoCliente == 1){
@@ -213,6 +224,8 @@ namespace VaiFundos
 
                                 aplicacao = new Aplicacao(valorAplicacao, codInvestimento, DateTime.Now, 0, Cliente.buscaClienteCpf(clientes, cpfCliente).getCodCliente());
 
+                                Aplicacao.escreveArquivo(aplicacao);
+
                                 Console.WriteLine("{0}, tem certeza que deseja incluir essa aplicação de R${1} nesse fundo {2}?", Cliente.buscaClienteCpf(clientes, cpfCliente).getNome(), valorAplicacao, FundoInvestimento.buscaFundo(fundoInvestimento, codInvestimento).getNome());
                                 Console.WriteLine("1 - Sim.");
                                 Console.WriteLine("2 - Não.");
@@ -224,16 +237,23 @@ namespace VaiFundos
 									FundoInvestimento.buscaFundo(Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento(), codInvestimento).buscaAplicacao().Add(aplicacao);
 									FundoInvestimento.imprimeListaAplicacao(FundoInvestimento.buscaFundo(Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento(), codInvestimento).buscaAplicacao());
 								}
-							}
+							} else
+                                if (opcaoCliente == 2)
+                                {
+                                    Console.WriteLine("Resgate");
+                                    for (int i = 0; i < Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento().Count(); i++ )
+                                    { 
+                                        Aplicacao.imprimeListaAplicacao(Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento()[i].buscaAplicacao());
+                                    }
+                                }
                         }
                     }
                 }
 
-				Console.WriteLine("1 - Realizar aplicação.");
-				Console.WriteLine("2 - Realizar resgate.");
-				Console.WriteLine("3 - Histórico de aplicações.");
-				Console.WriteLine("3 - Histórico de resgates.");
-				opcaoCliente = int.Parse(Console.ReadLine());
+                Console.WriteLine("Por favor, selecione a opção:");
+                Console.WriteLine("1 - Banco."); //TERÁ DE VALIDAR SE É O BANCO MESMO
+                Console.WriteLine("2 - Cliente.");
+                opcao = int.Parse(Console.ReadLine());
 			}
 
             Console.ReadKey();

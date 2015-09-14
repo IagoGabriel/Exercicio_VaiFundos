@@ -10,17 +10,17 @@ namespace VaiFundos
     class Aplicacao
     {
         private float valorAplicacao;
-        private int  codInvestimento;
+        private int codInvestimento;
         private DateTime dataAplicacao;
         private float rendimento;
-		private int codCliente;
+        private int codCliente;
 
-        public Aplicacao (float valorAplicacao, int codInvestimento, DateTime dataAplicacao, float rendimento, int codCliente)
+        public Aplicacao(float valorAplicacao, int codInvestimento, DateTime dataAplicacao, float rendimento, int codCliente)
         {
             this.valorAplicacao = valorAplicacao;
             this.codInvestimento = codInvestimento;
-			this.dataAplicacao = dataAplicacao;
-			this.rendimento = rendimento;
+            this.dataAplicacao = dataAplicacao;
+            this.rendimento = rendimento;
             this.codCliente = codCliente;
         }
 
@@ -33,7 +33,7 @@ namespace VaiFundos
         {
             return codInvestimento;
         }
-        
+
         public float getValorAplicacao()
         {
             return valorAplicacao;
@@ -59,22 +59,19 @@ namespace VaiFundos
             return rendimento;
         }
 
-		public int getCodCliente()
-		{
-			return codCliente;
-		}
+        public int getCodCliente()
+        {
+            return codCliente;
+        }
 
-		public static void escreveArquivo(List<Aplicacao> aplicacao)
+        public static void escreveArquivo(Aplicacao aplicacao)
         {
             try
             {
-                FileStream arqDados = new FileStream("../../aplicacao.txt", FileMode.Create, FileAccess.Write);
+                FileStream arqDados = new FileStream("../../aplicacao.txt", FileMode.Append, FileAccess.Write);
                 StreamWriter escritor = new StreamWriter(arqDados, Encoding.UTF8);
 
-                for (int i = 0; i < aplicacao.Count(); i++)
-                {
-                    escritor.WriteLine(aplicacao[i].valorAplicacao + ";" + aplicacao[i].codInvestimento + ";" + aplicacao[i].dataAplicacao.ToShortDateString() + ";" + aplicacao[i].rendimento + ";" + aplicacao[i].codCliente);
-                }
+                escritor.WriteLine(aplicacao.valorAplicacao + ";" + aplicacao.codInvestimento + ";" + aplicacao.dataAplicacao.ToShortDateString() + ";" + aplicacao.rendimento + ";" + aplicacao.codCliente);
 
                 escritor.Close();
                 arqDados.Close();
@@ -101,13 +98,13 @@ namespace VaiFundos
                     while (linha != null)
                     {
                         separador = linha.Split(';');
-                       
+
                         aplicacaoPadrao = new Aplicacao(float.Parse(separador[0]), int.Parse(separador[1]), DateTime.Parse(separador[2]), float.Parse(separador[3]), int.Parse(separador[4]));
-                     
+
                         linha = leitor.ReadLine();
                         aplicacao.Add(aplicacaoPadrao);
                     }
-                    
+
                     leitor.Close();
                     arqDados.Close();
                 }
@@ -122,7 +119,7 @@ namespace VaiFundos
         {
             for (int i = 0; i < aplicacao.Count(); i++)
             {
-                Console.WriteLine("\nValor Aplicação: {0}\nCódigo Investimento: {1}\nData Aplicaçao: {2}\nRendimento: {3}\n", aplicacao[i].valorAplicacao, aplicacao[i].codInvestimento,aplicacao[i].dataAplicacao, aplicacao[i].rendimento);
+                Console.WriteLine("\nValor Aplicação: {0}\nCódigo Investimento: {1}\nData Aplicaçao: {2}\nRendimento: {3}\n", aplicacao[i].valorAplicacao, aplicacao[i].codInvestimento, aplicacao[i].dataAplicacao, aplicacao[i].rendimento);
             }
         }
 
@@ -140,18 +137,18 @@ namespace VaiFundos
             return aplicacaoCod;
         }
 
-		public static List<Aplicacao> buscaAplicacaoCliente(List<Aplicacao> aplicacao, int codCliente)
-		{
-			List<Aplicacao> aplicacaoCod = null;
+        public static List<Aplicacao> buscaAplicacaoCliente(List<Aplicacao> aplicacao, int codCliente)
+        {
+            List<Aplicacao> aplicacaoCod = new List<Aplicacao>();
 
-			for (int i = 0; i < aplicacao.Count(); i++)
-			{
-				if (codCliente.Equals(aplicacao[i].getCodCliente()))
-				{
-					aplicacaoCod.Add(aplicacao[i]);
-				}
-			}
-			return aplicacaoCod;
-		}
-	}
+            for (int i = 0; i < aplicacao.Count(); i++)
+            {
+                if (codCliente.Equals(aplicacao[i].getCodCliente()))
+                {
+                    aplicacaoCod.Add(aplicacao[i]);
+                }
+            }
+            return aplicacaoCod;
+        }
+    }
 }
