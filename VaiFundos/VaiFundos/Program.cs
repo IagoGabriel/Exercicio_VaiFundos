@@ -248,7 +248,6 @@ namespace VaiFundos
                                     Console.WriteLine("Resgate");
                                     for (int i = 0; i < Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento().Count(); i++ )
                                     { 
-
                                         Aplicacao.imprimeListaAplicacao(Cliente.buscaClienteCpf(clientes, cpfCliente).getFundoInvestimento()[i].buscaAplicacao());
                                         Console.WriteLine("Informe o valor que deseja resgatar:");
                                         float valorResgate = float.Parse(Console.ReadLine());
