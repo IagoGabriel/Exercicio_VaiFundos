@@ -29,7 +29,7 @@ namespace VaiFundos
             this.codInvestimento = codInvestimento;
         }
 
-        public float getCodInvestimento()
+        public int getCodInvestimento()
         {
             return codInvestimento;
         }
@@ -149,6 +149,35 @@ namespace VaiFundos
                 }
             }
             return aplicacaoCod;
+        }
+
+        public static Aplicacao buscaAplicacaoClienteValor(List<Aplicacao> aplicacao, float valor)
+        {
+            for (int i = 0; i < aplicacao.Count(); i++)
+            {
+                if (valor.Equals(aplicacao[i].getValorAplicacao()))
+                {
+                    return aplicacao[i];
+                }
+            }
+            return null;
+        }
+
+        public void resgate(List<Aplicacao> aplicacao, float valorResgate)
+        {
+        
+            for(int i=0;i<aplicacao.Count();i++)
+            {
+                if(valorResgate == aplicacao[i].getValorAplicacao())
+                {
+                    aplicacao.Remove(aplicacao[i]);
+                }
+                else
+                {
+                    Console.WriteLine("O valor não corresponde a aplicação efetuada !");
+                }
+            }
+        
         }
     }
 }

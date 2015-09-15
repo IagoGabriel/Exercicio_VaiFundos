@@ -183,20 +183,23 @@ namespace VaiFundos
 								
 								for(int k=0;k<clientePadrao.fundoInvestimento.Count();k++)
 								{
-									if (clientePadrao.fundoInvestimento[k].getCodInvestimento().Equals(fundoInvestimento[j].getCodInvestimento()))
+                                    if (clientePadrao.fundoInvestimento[k].getCodInvestimento().Equals(Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i].getCodInvestimento()))
 									{
 										verifica = true;
 									}
+                                   
 								}
-								if (verifica)
-								{
-									FundoInvestimento.buscaFundo(clientePadrao.fundoInvestimento, fundoInvestimento[j].getCodInvestimento()).buscaAplicacao().Add(Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i]);
-								}
-								else
-								{
-									novoFundo.buscaAplicacao().Add(Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i]);
-									clientePadrao.fundoInvestimento.Add(novoFundo);
-								}
+                                if (verifica)
+                                {
+                                    //dando problema aqui
+                                    FundoInvestimento.buscaFundo(clientePadrao.fundoInvestimento, Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i].getCodInvestimento()).buscaAplicacao().Add(Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[j]);
+                                }
+                                else
+                                {
+                                    novoFundo.buscaAplicacao().Add(Aplicacao.buscaAplicacaoCliente(aplicacoes, clientePadrao.codCliente)[i]);
+                                    clientePadrao.fundoInvestimento.Add(novoFundo);
+                                }
+								
 							}
 						}
 						linha = leitor.ReadLine();
